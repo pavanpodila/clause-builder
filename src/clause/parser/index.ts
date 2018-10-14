@@ -2,6 +2,7 @@ import { parse as pegParse } from './parser';
 
 export interface Tag {
     name: string;
+    id: string;
     type?: string;
 }
 

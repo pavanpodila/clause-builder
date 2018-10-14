@@ -148,8 +148,8 @@ function peg$parse(input, options) {
       peg$c4 = peg$literalExpectation(":", false),
       peg$c5 = "]",
       peg$c6 = peg$literalExpectation("]", false),
-      peg$c7 = function(name, type) { return {name, type} },
-      peg$c8 = function(name) { return {name} },
+      peg$c7 = function(name, type) { return { name, type, id: id() } },
+      peg$c8 = function(name) { return { name, id: id() } },
       peg$c9 = peg$otherExpectation("identifier"),
       peg$c10 = /^[_a-z]/i,
       peg$c11 = peg$classExpectation(["_", ["a", "z"]], false, true),
@@ -571,6 +571,13 @@ function peg$parse(input, options) {
 
     return s0;
   }
+
+
+  	let counter = 0;
+  	function id() {
+      	return `id-${counter++}`;
+      }
+
 
   peg$result = peg$startRuleFunction();
 

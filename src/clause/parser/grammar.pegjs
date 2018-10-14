@@ -1,13 +1,20 @@
-Clause = 
+{
+	let counter = 0;
+	function id() {
+    	return `id-${counter++}`;
+    }
+}
+
+Clause =
 	ClauseItem*
-    
+
 ClauseItem
     = Tag
-	/ Text 
+	/ Text
 
 Tag "tag"
-	= "[" name:Identifier ":" type:Identifier "]" { return {name, type} }
-    / "[" name:Identifier "]" { return {name} }
+	= "[" name:Identifier ":" type:Identifier "]" { return { name, type, id: id() } }
+    / "[" name:Identifier "]" { return { name, id: id() } }
 
 Identifier "identifier"
 	= _ text:([_a-z]i[a-z0-9_]i*) _ {

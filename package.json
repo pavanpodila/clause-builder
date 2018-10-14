@@ -16,7 +16,7 @@
         "build": "react-scripts-ts build",
         "test": "react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
-        "build:parser": "pegjs -o src/clause-parser/parser.js src/clause-parser/grammar.pegjs "
+        "build:parser": "pegjs -o src/clause/parser/parser.js src/clause/parser/grammar.pegjs "
     },
     "devDependencies": {
         "@types/jest": "^23.3.5",

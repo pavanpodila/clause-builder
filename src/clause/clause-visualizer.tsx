@@ -63,7 +63,7 @@ export class ClauseVisualizer extends React.Component<Props> {
                     }
 
                     return (
-                        <TagItem key={item.name}>
+                        <TagItem key={item.id}>
                             {item.name}
                             {': '}
                             <TagType>{item.type || 'string'}</TagType>
