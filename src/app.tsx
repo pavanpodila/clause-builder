@@ -20,7 +20,12 @@ export class App extends React.Component {
         return (
             <Provider store={store}>
                 <Container>
-                    <h3>Clause Parser</h3>
+                    <h3>
+                        Clause Parser{' '}
+                        <small>
+                            <a href={'https://github.com/pavanpodila/clause-builder'}>Github</a>
+                        </small>
+                    </h3>
                     <pre
                         style={{
                             whiteSpace: 'pre-wrap',
