@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { Styles } from 'styled-components';
-import { Tag } from './clause-parser';
+import { Tag } from './parser';
 import { ParseError } from './store';
 
 const TagItem = styled.span`
@@ -11,12 +11,25 @@ const TagItem = styled.span`
     background: darkslategray;
     color: white;
     padding: 0.25rem;
+    margin: 0.25rem;
+    display: inline-block;
 `;
 
 const TagType = styled.span`
     border-bottom: 2px solid lightgoldenrodyellow;
     color: lightgoldenrodyellow;
     font-weight: bold;
+`;
+
+const PreContainer = styled.pre`
+    margin: 1rem 0;
+    font-family: Georgia, sans-serif;
+    font-size: 18px;
+    white-space: pre-wrap;
+    overflow: auto;
+
+    background: #cfe6d9;
+    padding: 0.5rem;
 `;
 
 interface Props {
@@ -29,20 +42,21 @@ export class ClauseVisualizer extends React.Component<Props> {
         const { items, error } = this.props;
 
         if (error) {
-            return `Failed: ${error.message}`;
+            return (
+                <PreContainer
+                    style={{
+                        color: 'red',
+                        ...this.props.style,
+                    }}
+                >
+                    {`Location: ${error.start.line}:${error.start.column}`}
+                    {`\n${error.message}`}
+                </PreContainer>
+            );
         }
 
         return (
-            <pre
-                style={{
-                    margin: '1rem 0',
-                    fontFamily: 'Georgia',
-                    fontSize: 18,
-                    whiteSpace: 'pre-wrap',
-                    overflow: 'auto',
-                    ...this.props.style,
-                }}
-            >
+            <PreContainer style={this.props.style}>
                 {items.map(item => {
                     if (typeof item === 'string') {
                         return item as string;
@@ -56,7 +70,7 @@ export class ClauseVisualizer extends React.Component<Props> {
                         </TagItem>
                     );
                 })}
-            </pre>
+            </PreContainer>
         );
     }
 }

@@ -7,6 +7,9 @@ const TextBlock = styled.textarea`
     width: 100%;
     font-family: 'PT Mono', 'Courier New', monospace;
     font-size: 18px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.5rem;
 `;
 
 @inject('store')
