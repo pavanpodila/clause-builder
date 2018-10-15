@@ -23,8 +23,8 @@ Identifier "identifier"
     }
 
 Text "text"
-	= text:[ \t\r\na-z0-9?()\-"',:;~`!@#$%^&*_=+{}|<>.?/\\]i+ { return text.join(''); }
+	= text:$[^\[\]\\]i+ { return text; }
+    / "\\" text:[\[\]\\] { return text }
 
 _ "whitespace"
 	= [ \t]*
-    
