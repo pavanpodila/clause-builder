@@ -1,5 +1,5 @@
 export const samples = {
-    simple: `The weather at [city: City] is [temp: Temperature][unit: TemperatureUnit]`,
+    simple: `The weather at [city: City] is [temp: Temperature]°[unit: TemperatureUnit]`,
     copyright: `
 Copyright [year:Date] [copyright_holder]
 
