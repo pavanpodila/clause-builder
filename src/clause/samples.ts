@@ -11,16 +11,17 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 `,
     greeting: `
+
 Hi!, my name is [person: user{name neq ""}] from [city: user{place.city neq ""}] of [country: user{place.country neq ""}]. 
 Let me be your guide as you explore popular destinations like:
 
-1. [destination1: Destination]
-2. [destination2: Destination]
-3. [destination3: Destination]
+1. [destination1: dest{user.dest1 neq ""}]
+2. [destination2: dest{user.dest2 neq ""}]
+3. [destination3: dest{user.dest3 neq ""}]
 
 Have fun exploring!
 
 Yours Truly,
-[person: Person]
-  `,
+[person: contact{user.name neq ""}]
+    `,
 };
