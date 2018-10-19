@@ -15,7 +15,8 @@ Here's some sample clauses with placeholders:
 ```text
 The weather at 
     [city: city{name = "Bengaluru", country.name = "India"}] is 
-    [temp: city{temperature > 0}]°[unit: temperatureUnit{unit != ""}]```
+    [temp: city{temperature > 0}]°[unit: temperatureUnit{unit != ""}]
+```
 
 ## How's it built?
 
