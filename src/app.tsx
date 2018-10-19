@@ -46,7 +46,7 @@ function Usage() {
                 </li>
                 <li>
                     Value is one of:
-                    <strong>{' string | number | boolean '}</strong>
+                    <strong>{' string | number | boolean | [string | number | boolean] '}</strong>
                 </li>
             </ul>
         </pre>
