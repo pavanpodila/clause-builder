@@ -1,13 +1,21 @@
 ## Clause Parser
 
-A clause is some text interspersed with `tags`. __Tags__ are placeholders, which will get their 
-values when the clause is created. Tags are specified as __`[name: value]`__
+A clause is some text interspersed with `placeholders`. __placeholders_, which will get 
+their values when the clause is created. 
 
-Here's some sample clause with tags:
+Tags are specified with the following syntax:
 
 ```text
-The weather at [city: City] is [temp: Temperature][unit: TemperatureUnit]
+[<name>: <source> { <field-path> <operator> <value> }]
 ```
+
+The complete grammar can be found in [grammar.pegjs](src/clause/parser/grammar.pegjs)
+Here's some sample clauses with placeholders:
+
+```text
+The weather at 
+    [city: city{name = "Bengaluru", country.name = "India"}] is 
+    [temp: city{temperature > 0}]°[unit: temperatureUnit{unit != ""}]```
 
 ## How's it built?
 
