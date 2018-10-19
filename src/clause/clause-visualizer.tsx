@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled, { Styles } from 'styled-components';
 import { Tag } from './parser';
 import { ParseError } from './store';
@@ -15,12 +15,6 @@ const TagItem = styled.span`
     display: inline-block;
 `;
 
-const TagType = styled.span`
-    border-bottom: 2px solid lightgoldenrodyellow;
-    color: lightgoldenrodyellow;
-    font-weight: bold;
-`;
-
 const PreContainer = styled.pre`
     margin: 1rem 0;
     font-family: Georgia, sans-serif;
@@ -30,6 +24,11 @@ const PreContainer = styled.pre`
 
     background: #cfe6d9;
     padding: 0.5rem;
+`;
+
+const Span = styled.span`
+    font-size: 0.9rem;
+    color: ${props => props.color || 'black'};
 `;
 
 interface Props {
@@ -65,12 +64,44 @@ export class ClauseVisualizer extends React.Component<Props> {
                     return (
                         <TagItem key={item.id}>
                             {item.name}
-                            {': '}
-                            <TagType>{item.type || 'string'}</TagType>
+                            {' = '}
+                            <Span color={'lightblue'}>{item.query.source}</Span>
+                            {'{ '}
+                            {join(
+                                item.query.expressions.map(x => (
+                                    <Span key={x.field} color={'yellow'}>
+                                        {x.field} {x.operator} {literal(x.value)}
+                                    </Span>
+                                )),
+                                <Span color={'lightgreen'}>{' and '}</Span>,
+                            )}
+                            {' }'}
                         </TagItem>
                     );
                 })}
             </PreContainer>
         );
     }
+}
+
+function literal(value: string | number | boolean) {
+    switch (typeof value) {
+        case 'string':
+            return `"${value}"`;
+        case 'number':
+            return `${value}`;
+        case 'boolean':
+            return `${value}`;
+    }
+}
+
+function join(list: React.ReactNode[], element: React.ReactNode) {
+    return list.map((x, index) => {
+        return (
+            <Fragment key={index}>
+                {x}
+                {index !== list.length - 1 ? element : null}
+            </Fragment>
+        );
+    });
 }

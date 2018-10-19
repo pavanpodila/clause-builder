@@ -15,6 +15,44 @@ const Container = styled.div`
     box-sizing: border-box;
 `;
 
+function Usage() {
+    return (
+        <pre
+            style={{
+                whiteSpace: 'pre-wrap',
+                maxWidth: '100%',
+                background: 'lightgoldenrodyellow',
+                padding: '0.5rem',
+            }}
+        >
+            <h4>--- Usage ---</h4>
+            <ul>
+                <li>
+                    Type the text with placeholders specified within <strong>[</strong>{' '}
+                    <strong>]</strong>
+                </li>
+                <li>
+                    Syntax for a placeholder:
+                    <strong>[ {'name'}</strong>
+                    {': '}
+                    <strong>{'source'}</strong>
+                    {'{ '}
+                    <strong>path.to.field</strong> <strong>operator</strong> <strong>value</strong>
+                    {' } ]'}
+                </li>
+                <li>
+                    Operator is one of:
+                    <strong>{' =, !=, >, <, <=, >=, in, !in '}</strong>
+                </li>
+                <li>
+                    Value is one of:
+                    <strong>{' string | number | boolean '}</strong>
+                </li>
+            </ul>
+        </pre>
+    );
+}
+
 export class App extends React.Component {
     public render() {
         return (
@@ -26,19 +64,8 @@ export class App extends React.Component {
                             <a href={'https://github.com/pavanpodila/clause-builder'}>Github</a>
                         </small>
                     </h3>
-                    <pre
-                        style={{
-                            whiteSpace: 'pre-wrap',
-                            maxWidth: '100%',
-                            background: 'lightgoldenrodyellow',
-                            padding: '0.5rem',
-                        }}
-                    >
-                        <h4>--- Usage ---</h4>
-                        Type the text with placeholders specified as [<strong>name</strong>:
-                        <strong>type</strong>
-                        ]. The "type" is optional and defaults to "string".
-                    </pre>
+
+                    <Usage />
 
                     <Observer>
                         {() => (

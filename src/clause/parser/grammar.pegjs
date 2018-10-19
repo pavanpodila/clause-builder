@@ -3,6 +3,11 @@
 	function id() {
     	return `id-${counter++}`;
     }
+
+    function stripDelimiters(first, list) {
+	    const rest = list.length > 0 ? list.map(x => x[2]) : undefined;
+    	return rest ? [first].concat(rest) : [first];
+    }
 }
 
 Clause =
@@ -24,28 +29,33 @@ Query "query"
 
 Expression "expression"
 	= pred:Predicate _ next:("," _ innerPred:Predicate)* {
-	    const rest = next.length > 0 ? next.map(x=>x[2]) : undefined;
-    	return rest ? [pred].concat(rest) : [pred]
-     }
+    	return stripDelimiters(pred, next);
+      }
 
 Predicate "predicate"
 	= prop:$PropertyPath _ op:Operator _ value:Value {
     	return { field: prop.trim(), operator: op, value   }
-     }
+      }
 
 PropertyPath "property-path"
 	= Identifier ("." Identifier)*
 
 Operator "operator"
-	= "in" / "notIn" / "eq" / "neq" / "lt" / "gt" / "lte" / "gte"
+	= "in" / "!in" / "=" / "!=" / "<" / ">" / "<=" / ">="
 
 Value "value"
-	= Literal
+	= SingleLiteral
+    / ArrayLiteral
 
-Literal "literal"
-	= BooleanLiteral
-    / StringLiteral
-    / NumberLiteral
+ArrayLiteral
+	= "[" _ values:CommaSeparatedValues _ "]" { return values }
+
+CommaSeparatedValues
+	= first:SingleLiteral _ rest:("," _ SingleLiteral)* {
+        return stripDelimiters(first, rest);
+      }
+
+SingleLiteral = BooleanLiteral / StringLiteral / NumberLiteral
 
 BooleanLiteral "boolean value"
 	= value:"true" { return Boolean(value) }
